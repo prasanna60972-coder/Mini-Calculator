@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALCULATOR</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: rgb(250, 251, 251);
+    }
+
+    .container {
+        background-color: rgb(244, 241, 241);
+        width: 300px;
+        padding: 15px;
+        margin: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        border: 1px solid gray;
+    }
+    
+
+    #btn_container {
+        /* border: 1px solid black; */
+        padding: 12px;
+        margin: 7px;
+    }
+
+    #btn_container button {
+        padding: 20px;
+        width: 60px;
+        border: none;
+        border: 1px solid gray;
+        display: flexbox;
+        margin-bottom: 4px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+
+    }
+
+    #display {
+        border: none;
+        background-color: rgb(243, 240, 240);
+        border: 1px solid grey;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+    }
+
+    #btn_container .clear {
+        width: 100px;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        justify-content: center;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <center>
+            <h1 class="head" style="font-weight: 500;">CALCULATOR</h1>
+            <div id="cal">
+                <input type="text" id="display"
+                    style="text-align: right; width: 220px; padding: 15px;background: transparent; max-width: 300px;">
+            </div>
+            <div id="btn_container">
+                <button class="digit" value="1">1</button>
+                <button class="digit" value="2">2</button>
+                <button class="digit" value="3">3</button>
+                <button class="operator" value="+">+</button>
+                <button class="digit" value="4">4</button>
+                <button class="digit" value="5">5</button>
+                <button class="digit" value="6">6</button>
+                <button class="operator" value="-">-</button>
+                <button class="digit" value="7">7</button>
+                <button class="digit" value="8">8</button>
+                <button class="digit" value="9">9</button>
+                <button class="operator" value="*">*</button>
+                <button class="digit" value=".">.</button>
+                <button class="digit" value="0">0</button>
+                <button class="equals" value="=">=</button>
+                <button class="operator" value="/">/</button><br><br>
+
+                <button class="clear" value="C">Clear</button>
+
+            </div>
+
+        </center>
+    </div>
+</body>
+<script>
+    // JavaScript
+    const display = document.getElementById('display');
+    const btn_container = document.querySelectorAll('button');
+
+    let calculation = '';
+    let result = '';
+
+
+    btn_container.forEach(button => {
+        button.addEventListener('click', () => {
+            const value = button.getAttribute('value');
+            if (button.classList.contains('digit')) {
+                calculation += value;
+                display.value = calculation;
+            } else if (button.classList.contains('operator')) {
+                calculation += value;
+                display.value = calculation;
+            } else if (button.classList.contains('equals')) {
+                try {
+                    result = eval(calculation);
+                    display.value = result;
+                    calculation = result.toString();
+                } catch (error) {
+                    display.value = 'error';
+                    calculation = '';
+                }
+            } else if (button.classList.contains('clear')) {
+                calculation = '';
+                result = '';
+                display.value = '';
+            }
+        });
+    });
+
+
+</script>
+
+</html>
